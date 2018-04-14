@@ -1,0 +1,5 @@
+# Ignore intellij specific files
+*.iml
+/*.iml
+.idea
+*/target/*

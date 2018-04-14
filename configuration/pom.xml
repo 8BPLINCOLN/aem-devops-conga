@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd ">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- ====================================================================== -->
+    <!-- P A R E N T P R O J E C T D E S C R I P T I O N -->
+    <!-- ====================================================================== -->
+    <parent>
+        <groupId>com.digitalplatoon.aem.ops</groupId>
+        <artifactId>phoenix</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <!-- ====================================================================== -->
+    <!-- P R O J E C T D E S C R I P T I O N -->
+    <!-- ====================================================================== -->
+
+    <artifactId>phoenix.configuration</artifactId>
+    <packaging>config</packaging>
+    <name>AEM Configuration using CONGA</name>
+
+    <dependencies>
+
+        <!-- Example content package to download and extract metadata -->
+        <dependency>
+            <groupId>io.wcm</groupId>
+            <artifactId>io.wcm.caconfig.editor.package</artifactId>
+            <version>1.0.0</version>
+            <type>zip</type>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+
+        <plugins>
+
+            <plugin>
+                <groupId>io.wcm.devops.conga</groupId>
+                <artifactId>conga-maven-plugin</artifactId>
+                <version>1.8.0</version>
+                <extensions>true</extensions>
+                <dependencies>
+
+                    <!-- Activate further CONGA plugins for special file types -->
+                    <dependency>
+                        <groupId>io.wcm.devops.conga.plugins</groupId>
+                        <artifactId>io.wcm.devops.conga.plugins.aem</artifactId>
+                        <version>1.7.1-SNAPSHOT</version>
+                    </dependency>
+
+                </dependencies>
+                <configuration>
+
+                    <!-- Path to AEM crytpo key (recommendation: encrypt it with Ansible Vault) -->
+                    <pluginConfig>
+                        aem-plugin;cryptoAesKeyUrl=classpath:/crypto/master
+                    </pluginConfig>
+
+                </configuration>
+            </plugin>
+
+            <!-- do not deploy this example into maven repository -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <inherited>false</inherited>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <!-- do not generate site for this project -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                    <skipDeploy>true</skipDeploy>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>
