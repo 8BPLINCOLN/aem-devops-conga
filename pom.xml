@@ -477,6 +477,6 @@
     <modules>
         <module>core</module>
         <module>ui.apps</module>
-        <module>configuration</module>
+        <module>configuration.conga</module>
     </modules>
 </project>

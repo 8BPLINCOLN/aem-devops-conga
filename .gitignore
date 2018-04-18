@@ -3,3 +3,4 @@
 /*.iml
 .idea
 */target/*
+/environment.setup/ansible/files/AEM_6.3_Quickstart.jar
